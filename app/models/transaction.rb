@@ -8,7 +8,9 @@ class Transaction
   belongs_to :sender, class_name: 'User', inverse_of: :sender
   belongs_to :recipient, class_name: 'User', inverse_of: :recipient
 
-  scope :user_transactions, ->(user) { where(sender_id: user.id).or(where(recipient_id: user.id)) }
+  scope :user_transactions, ->(user) {   includes(:sender, :recipient)
+                                         .where(sender_id: user.id)
+                                         .or(where(recipient_id: user.id)) }
 
   before_save :update_balances
   validate :sender_not_equal_to_recipient
