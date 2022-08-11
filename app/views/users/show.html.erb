@@ -2,6 +2,11 @@
 
 <%= render @user %>
 
+<div id="sender_transactions">
+  <h3> Transactions</h3>
+  <%= render partial: "transactions/transactions", locals: { transactions: Transaction.user_transactions(@user)} %>
+</div>
+
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>

@@ -1,0 +1,36 @@
+<div class="container">
+
+  <hr>
+
+  <%unless @user %>
+    <p>
+      <strong>Name:</strong>
+      <%= transaction.sender.name %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= transaction.sender.email %>
+    </p>
+  <%end %>
+
+  <p>
+    <strong>Transaction Number:</strong>
+    <%= transaction_number %>
+  </p>
+
+  <p>
+    <strong>Amount:</strong>
+    <%= transaction.amount %>
+  </p>
+
+  <p>
+    <% if @user && @user == transaction.recipient %>
+      <strong>Sender name:</strong>
+      <%= transaction.sender.name %>
+    <%else %>
+      <strong>Recipient name:</strong>
+      <%= transaction.recipient.name %>
+    <%end %>
+  </p>
+</div>

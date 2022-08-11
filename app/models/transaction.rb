@@ -8,19 +8,22 @@ class Transaction
   belongs_to :sender, class_name: 'User', inverse_of: :sender
   belongs_to :recipient, class_name: 'User', inverse_of: :recipient
 
-  after_create :update_balances
+  scope :user_transactions, ->(user) { where(sender_id: user.id).or(where(recipient_id: user.id)) }
+
+  before_save :update_balances
   validate :sender_not_equal_to_recipient
 
   private
 
   def update_balances
-    binding.pry
     User.with_session do |user|
-      binding.pry
-      user.start_transaction
-      sender.update!(account: { balance: sender.account.balance - amount })
-      recipient.update!(account: { balance: recipient.account.balance + amount })
-      user.commit_transaction
+      begin
+        user.start_transaction
+        sender.update!(account: { balance: sender.account.balance - amount })
+        recipient.update!(account: { balance: recipient.account.balance + amount })
+        user.commit_transaction
+      end
+
     end
   end
 

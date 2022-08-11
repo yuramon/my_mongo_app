@@ -1,6 +1,10 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Users</h1>
+<div style="padding-bottom: 80px;">
+  <h1 style="text-align:left;float:left;">Users</h1>
+  <h1 style="text-align:right;float:right;">
+    <%= link_to "Transactions", root_path %>
+  </h1>
+</div>
 
 <div id="users">
   <% @users.each do |user| %>

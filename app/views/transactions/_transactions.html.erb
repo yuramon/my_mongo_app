@@ -1,0 +1,3 @@
+<% transactions.each_with_index do |transaction, i| %>
+  <%= render partial: "transactions/transaction", locals: { transaction: transaction , transaction_number: i+1} %>
+<% end %>

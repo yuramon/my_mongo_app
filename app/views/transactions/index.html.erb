@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<div style="padding-bottom: 80px;">
+  <h1 style="text-align:left;float:left;">Transactions</h1>
+  <h1 style="text-align:right;float:right;">
+    <%= link_to "Users", users_path %>
+  </h1>
+</div>
+
+<%= link_to "New transaction", new_transaction_path %>
+
+<div id="transactions">
+  <%= render partial: "transactions", locals: { transactions: @transactions} %>
+</div>
